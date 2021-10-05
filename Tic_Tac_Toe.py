@@ -2,9 +2,7 @@
 ## 1 create board and display board
 ##play game
   ## handle turn
-
 import random 
-
 game_still_going=True
 current_player= "X"
 valid=True
@@ -17,7 +15,7 @@ board=["-","-","-",
 def display_board():
     print(board[0]+" | "+board[1]+" | "+board[2])
     print(board[3]+" | "+board[4]+" | "+board[5])
-    print(board[6]+" | "+board[7]+" | "+board[8])
+    print(board[6]+" | "+board[7]+" | "+board[8]+"\n")
 
     
 def play_game():
@@ -53,7 +51,6 @@ def handle_turn():
     while position not in ['1','2','3','4','5','6','7','8','9']:
         print("That is an invalid input")
         position = input("Pick a position by entering a whole number from 1 to 9: ")
-        continue
     position = int(position)-1
     
     if board[position]!="-":
@@ -71,23 +68,123 @@ def handle_turnAI():
     global valid
     print(current_player+"'s turn")
     if current_player == "O":
-        position = random.randint(1,9)
+        if board[4]=="-":   # Starting position if there is no player move
+            position = 5
+        # Attacking 
+        elif board[0]==board[1]=="O"and board[2]=="-":        # rows1
+            position = 3
+        elif board[1]==board[2]=="O"and board[0]=="-":        # rows1
+            position = 1
+        elif board[0]==board[2]=="O"and board[1]=="-":        # rows1
+            position = 2
+        elif board[3]==board[4]=="O" and board[5]=="-":     # rows2
+            position = 6
+        elif board[3]==board[5]=="O" and board[4]=="-":     # rows2
+            position = 5
+        elif board[5]==board[4]=="O" and board[3]=="-":     # rows2
+            position = 4
+        elif board[6]==board[7]=="O" and board[8]=="-":     # rows3
+            position = 9
+        elif board[8]==board[7]=="O" and board[6]=="-":     # rows3
+            position = 7
+        elif board[6]==board[8]=="O" and board[7]=="-":     # rows3
+            position = 8
+        elif board[0]==board[3]=="O" and board[6]=="-":     # columns1
+            position = 7
+        elif board[3]==board[6]=="O" and board[0]=="-":     # columns1
+            position = 1
+        elif board[0]==board[6]=="O" and board[3]=="-":     # columns1
+            position = 4
+        elif board[1]==board[4]=="O" and board[7]=="-":     # columns2
+            position = 8
+        elif board[4]==board[7]=="O" and board[1]=="-":     # columns2
+            position = 2
+        elif board[1]==board[7]=="O" and board[4]=="-":     # columns2
+            position = 5
+        elif board[2]==board[5]=="O" and board[8]=="-":     # columns3
+            position = 9
+        elif board[2]==board[8]=="O" and board[5]=="-":     # columns3
+            position = 6
+        elif board[8]==board[5]=="O" and board[2]=="-":     # columns3
+            position = 3
+        elif board[0]==board[4]=="O" and board[8]=="-":     # diagonal1
+            position = 9
+        elif board[0]==board[8]=="O" and board[4]=="-":     # diagonal1
+            position = 5
+        elif board[8]==board[4]=="O" and board[0]=="-":     # diagonal1
+            position = 1
+        elif board[2]==board[4]=="O" and board[6]=="-":     # diagonal2
+            position = 7
+        elif board[6]==board[4]=="O" and board[2]=="-":     # diagonal2
+            position = 3
+        elif board[2]==board[6]=="O" and board[4]=="-":     # diagonal2
+            position = 5
+            #block
+        elif board[0]==board[1]!="-"and board[2]=="-":        # rows1
+            position = 3
+        elif board[1]==board[2]!="-"and board[0]=="-":        # rows1
+            position = 1
+        elif board[0]==board[2]!="-"and board[1]=="-":        # rows1
+            position = 2
+        elif board[3]==board[4]!="-" and board[5]=="-":     # rows2
+            position = 6
+        elif board[3]==board[5]!="-" and board[4]=="-":     # rows2
+            position = 5
+        elif board[5]==board[4]!="-" and board[3]=="-":     # rows2
+            position = 4
+        elif board[6]==board[7]!="-" and board[8]=="-":     # rows3
+            position = 9
+        elif board[8]==board[7]!="-" and board[6]=="-":     # rows3
+            position = 7
+        elif board[6]==board[8]!="-" and board[7]=="-":     # rows3
+            position = 8
+        elif board[0]==board[3]!="-" and board[6]=="-":     # columns1
+            position = 7
+        elif board[3]==board[6]!="-" and board[0]=="-":     # columns1
+            position = 1
+        elif board[0]==board[6]!="-" and board[3]=="-":     # columns1
+            position = 4
+        elif board[1]==board[4]!="-" and board[7]=="-":     # columns2
+            position = 8
+        elif board[4]==board[7]!="-" and board[1]=="-":     # columns2
+            position = 2
+        elif board[1]==board[7]!="-" and board[4]=="-":     # columns2
+            position = 5
+        elif board[2]==board[5]!="-" and board[8]=="-":     # columns3
+            position = 9
+        elif board[2]==board[8]!="-" and board[5]=="-":     # columns3
+            position = 6
+        elif board[8]==board[5]!="-" and board[2]=="-":     # columns3
+            position = 3
+        elif board[0]==board[4]!="-" and board[8]=="-":     # diagonal1
+            position = 9
+        elif board[0]==board[8]!="-" and board[4]=="-":     # diagonal1
+            position = 5
+        elif board[8]==board[4]!="-" and board[0]=="-":     # diagonal1
+            position = 1
+        elif board[2]==board[4]!="-" and board[6]=="-":     # diagonal2
+            position = 7
+        elif board[6]==board[4]!="-" and board[2]=="-":     # diagonal2
+            position = 3
+        elif board[2]==board[6]!="-" and board[4]=="-":     # diagonal2
+            position = 5
+        else:
+            position = random.randint(1,9)
+        
     else:
          position = input("Pick a position by entering a whole number from 1 to 9: ")
          while position not in ['1','2','3','4','5','6','7','8','9']:
-             print("That is an invalid input")
-             position = input("Pick a position by entering a whole number from 1 to 9: ")
-             continue
+            print("That is an invalid input")
+            position = input("Pick a position by entering a whole number from 1 to 9: ")
     position = int(position)-1
     
     if board[position]!="-":
-            print("You can't go there!")
+            print("\nYou can't go there!\n")
             valid=False
     
     if board[position] =="-":
         board[position]=current_player
         valid=True
-         
     display_board()
 
 def switch_player():
@@ -169,11 +266,4 @@ pick_mode()
 
 while game_still_going == False:
     play_again()
-
-
-
-
-    
-    
-
 
